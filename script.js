@@ -1,24 +1,28 @@
 
-circles = document.querySelectorAll('.circle')
+boxs = document.querySelectorAll('.box')
 ScordBoard = document.querySelector('.score-board')
 timeKeeper = document.querySelector('.time')
 startBtn = document.getElementById('start-button')
-circleContainer = document.getElementById('circle-container')
+boxContainer = document.getElementById('box-container')
 time = 60
 speed = 5000
 x1 = ""
 points = ""
 restart = true
 
+
+//add lister to the start button
 startBtn.addEventListener('click',countdown)
 
 // reset all not active
 const reset = () =>{    
-    circles.forEach((circle) => circle.classList.remove('active'));
+    boxs.forEach((box) => box.classList.remove('active'));
 }
-// circles.forEach((circle) => addEventListener('click',start,false));
-// circles.forEach((circle) => addEventListener('click',score,false));
+// boxs.forEach((box) => addEventListener('click',start,false));
+// boxs.forEach((box) => addEventListener('click',score,false));
 
+
+//start function where we genorate a random box to show and astivate
 function start(){
     reset();
     x2 = Math.floor(Math.random() * 10 + 1)
@@ -32,21 +36,23 @@ function start(){
    
 }
 
+
+//check score check if the time is up
 function score (elem) {
     if(time == 0){
         
         clearInterval(s)
         return
     }
-    if(elem.id == x1 && elem.className == "circle active"){
+    if(elem.id == x1 && elem.className == "box active"){
         reset()
         points++
         ScordBoard.innerText = "Score: " + points
     }else{
-        if(elem.id !== x1 && elem.className == "circle"){
-        circleContainer.style.border = "1px solid #FF494A"
+        if(elem.id !== x1 && elem.className == "box"){
+        boxContainer.style.border = "1px solid #FF494A"
         setTimeout(() => {
-            circleContainer.style.border = "1px solid #fff "
+            boxContainer.style.border = "1px solid #fff "
         }, 250);
         }
     }
@@ -71,7 +77,7 @@ function score (elem) {
 }
 
 
-
+// starts the game and checks if the game is over
 function countdown() {
     if(restart === true){
         startBtn.style.opacity = "0"
